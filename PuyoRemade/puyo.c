@@ -224,21 +224,48 @@ void DropPuyo(int* isMerged)
 	}
 }
 
-void RotatePuyo(int* direction, int(*Puyos[2][2]))
+void RotatePuyo(int direction, int(*Puyos)[2])
 {
-	switch (*direction)
+	int Temp;
+
+	switch (direction)
+	{
+	case LEFT:
+		Temp = Puyos[0][0];
+		Puyos[0][0] = Puyos[0][1];
+		Puyos[0][1] = Puyos[1][1];
+		Puyos[1][1] = Puyos[1][0];
+		Puyos[1][0] = Temp;
+		break;
+	case RIGHT:
+		Temp = Puyos[0][0];
+		Puyos[0][0] = Puyos[1][0];
+		Puyos[1][0] = Puyos[1][1];
+		Puyos[1][1] = Puyos[0][1];
+		Puyos[0][1] = Temp;
+	}
+	if (Puyos[1][0] == EMPTY && Puyos[1][1] == EMPTY)
+	{
+		Temp = Puyos[0][0];
+		Puyos[0][0] = Puyos[1][0];
+		Puyos[1][0] = Temp;
+		Temp = Puyos[0][1];
+		Puyos[0][1] = Puyos[1][1];
+		Puyos[1][1] = Temp;
+	}
+}
+
+void MovePuyo(int direction, struct display* Field)
+{
+	switch (direction)
 	{
 	case LEFT:
 		for (int y = 0; y < 2; y++)
 		{
-			for (int x = 0; x < 2; x++)
+			for (int x = 0; x < 2; x ++)
 			{
-				Puyos[0][0] = Puyos[0][1];
-				Puyos[0][1] = Puyos[1][1];
-				Puyos[1][0] = Puyos[0][0];
-				Puyos[0][0] = Puyos[0][1];
+
 			}
 		}
-		break;
 	}
 }
